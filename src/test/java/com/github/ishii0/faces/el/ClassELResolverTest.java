@@ -40,8 +40,7 @@ public class ClassELResolverTest {
             addClass(ClassELResolver.class)
             .addAsWebResource(new File(WEBAPP_SRC, "index.xhtml"))
             .addAsWebInfResource(new File(WEBAPP_SRC + "/WEB-INF", "faces-config.xml"))
-            .addAsWebInfResource(new File(WEBAPP_SRC + "/WEB-INF", "web.xml"))
-            .addAsWebInfResource(new File(WEBAPP_SRC + "/WEB-INF", "beans.xml"));
+            .addAsWebInfResource(new File(WEBAPP_SRC + "/WEB-INF", "web.xml"));
     }
 
     public ClassELResolverTest() {
