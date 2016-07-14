@@ -66,18 +66,12 @@ public class ClassELResolverTest {
     }
 
     @Test
-    public void testELClass() throws IOException {
-        HtmlParagraph anchor = (HtmlParagraph) page.getElementById("klass");
-        assertTrue(anchor.getTextContent().equals("String"));
-    }
-
-    @Test
     public void testStaticMethod() throws IOException {
         HtmlParagraph anchor = (HtmlParagraph) page.getElementById("staticMethod");
         assertTrue(anchor.getTextContent().equals("java.lang.Object"));
     }
 
-//    @Test
+    @Test
     public void testStaticField() throws IOException {
         HtmlParagraph anchor = (HtmlParagraph) page.getElementById("staticField");
         assertTrue(anchor.getTextContent().equals(String.valueOf(Boolean.TRUE)));
