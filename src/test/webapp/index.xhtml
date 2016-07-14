@@ -5,7 +5,9 @@
         <title>Facelet Title</title>
     </head>
     <body>
-        <p id="id1">#{String.klass.simpleName}</p>
+        <p id="klass">#{String.klass.simpleName}</p>
+        <p id="staticMethod">#{Class.forName("java.lang.Object").name}</p>
+        <p id="staticField">#\{Boolean.TRUE}</p>
     </body>
 </html>
 

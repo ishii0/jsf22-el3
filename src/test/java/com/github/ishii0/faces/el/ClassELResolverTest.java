@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.ishii0.faces.el;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -71,8 +66,20 @@ public class ClassELResolverTest {
     }
 
     @Test
-    public void testLink() throws IOException {
-        HtmlParagraph anchor = (HtmlParagraph) page.getElementById("id1");
-        assertTrue(anchor.getTextContent().contains("String"));
+    public void testELClass() throws IOException {
+        HtmlParagraph anchor = (HtmlParagraph) page.getElementById("klass");
+        assertTrue(anchor.getTextContent().equals("String"));
+    }
+
+    @Test
+    public void testStaticMethod() throws IOException {
+        HtmlParagraph anchor = (HtmlParagraph) page.getElementById("staticMethod");
+        assertTrue(anchor.getTextContent().equals("java.lang.Object"));
+    }
+
+//    @Test
+    public void testStaticField() throws IOException {
+        HtmlParagraph anchor = (HtmlParagraph) page.getElementById("staticField");
+        assertTrue(anchor.getTextContent().equals(String.valueOf(Boolean.TRUE)));
     }
 }
