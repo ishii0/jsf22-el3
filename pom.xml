@@ -8,7 +8,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.jboss.arquillian.version>1.1.10.Final</org.jboss.arquillian.version>
-        <org.wildfly>8.2.0.Final</org.wildfly>
+        <org.wildfly>10.0.0.Final</org.wildfly>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -55,66 +55,24 @@
             <version>2.13</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.arquillian.container</groupId>
+            <artifactId>arquillian-container-chameleon</artifactId>
+            <version>1.0.0.Alpha6</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-    <profiles>
-        <profile>
-            <id>wildfly-managed-arquillian</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <serverProfile>standalone-full.xml</serverProfile>
-                <serverRoot>${project.build.directory}/wildfly-${org.wildfly}</serverRoot>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.wildfly</groupId>
-                    <artifactId>wildfly-arquillian-container-managed</artifactId>
-                    <version>${org.wildfly}</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>unpack</id>
-                                <phase>process-test-classes</phase>
-                                <goals>
-                                    <goal>unpack</goal>
-                                </goals>
-                                <configuration>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>org.wildfly</groupId>
-                                            <artifactId>wildfly-dist</artifactId>
-                                            <version>${org.wildfly}</version>
-                                            <type>zip</type>
-                                            <overWrite>false</overWrite>
-                                            <outputDirectory>${project.build.directory}</outputDirectory>
-                                        </artifactItem>
-                                    </artifactItems>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.19.1</version>
-                        <configuration>
-                            <environmentVariables>
-                                <JBOSS_HOME>${project.build.directory}/wildfly-${org.wildfly}</JBOSS_HOME>
-                            </environmentVariables>
-                            <systemPropertyVariables>
-                                <arquillian.launch>wildfly</arquillian.launch>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <chameleonTarget>wildfly:${org.wildfly}:managed</chameleonTarget>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
